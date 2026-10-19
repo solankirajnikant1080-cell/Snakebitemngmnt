@@ -1,1 +1,251 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snake Bite Protocol – NurseSaathi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #f4f7f9;
+    color: #2c3e50;
+    font-size: 15px;
+    line-height: 1.5;
+    padding-bottom: 75px;
+  }
+  header {
+    background: linear-gradient(135deg, #c0392b, #8e44ad);
+    color: #fff;
+    padding: 16px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  header h1 { font-size: 18px; font-weight: 600; }
+  header p { font-size: 11px; opacity: .9; }
+  main { padding: 12px; }
+  .tab { display: none; }
+  .tab.active { display: block; animation: fade .2s; }
+  @keyframes fade { from{opacity:0} to{opacity:1} }
 
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  }
+  .card h2 {
+    font-size: 16px;
+    color: #c0392b;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #f9ebea;
+  }
+  .card h3 { font-size: 14px; color: #34495e; margin: 10px 0 4px; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 6px; font-size: 14px; }
+  .red { color: #e74c3c; font-weight: 600; }
+  .green { color: #27ae60; font-weight: 600; }
+  .warn {
+    background: #fff3cd;
+    border-left: 4px solid #f39c12;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  .danger {
+    background: #fdecea;
+    border-left: 4px solid #e74c3c;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  .success {
+    background: #e8f8f5;
+    border-left: 4px solid #1abc9c;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+  th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eef2f5; }
+  th { background: #fdf2f0; color: #c0392b; font-size: 12px; }
+  tr:last-child td { border-bottom: none; }
+
+  nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #fff; display: flex; overflow-x: auto;
+    box-shadow: 0 -2px 10px rgba(0,0,0,.1);
+    z-index: 200;
+  }
+  nav button {
+    flex: 1 0 auto;
+    min-width: 70px;
+    padding: 8px 4px;
+    border: none; background: none;
+    font-size: 10px; color: #666;
+    cursor: pointer; text-align: center;
+  }
+  nav button span { display: block; font-size: 20px; margin-bottom: 2px; }
+  nav button.active { color: #c0392b; font-weight: 600; background: #fdf2f0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🐍 Snake Bite Protocol</h1>
+  <p>CHC/PHC Nursing Protocol (Based on National Guidelines)</p>
+</header>
+
+<main>
+
+<!-- 1. FIRST AID & TRIAGE -->
+<section class="tab active" id="t-firstaid">
+  <div class="card">
+    <h2>🚑 First Aid (Pre-Hospital)</h2>
+    <div class="danger">
+      <b>❌ What NOT to do (Strictly Avoid):</b>
+      <ul>
+        <li>Tourniquet / rope / tight bandage બાંધવું</li>
+        <li>ચીરો પાડવો (incision / cuts)</li>
+        <li>મોંથી ઝેર ચૂસવું (suction)</li>
+        <li>બાઇટ સાઇટ પર સાબુ/કેમિકલ ધોવું (ASV માટે સ્વેબ જોઈએ)</li>
+        <li>દોરો/વાદળી/ઘરગથ્થુ ઉપચાર લગાવવો</li>
+      </ul>
+    </div>
+    <h3>✅ What TO Do:</h3>
+    <ul>
+      <li>દર્દીને શાંત કરાવો, ડરામણી ન કરો.</li>
+      <li>દર્દીને સપાટ સૂવડાવો, બાઇટ કરેલું અંગ હૃદયની નીચે રાખો.</li>
+      <li>બાઇટ કરેલા અંગમાંથી વીંટી, ઘડિયાળ, બ્રેસલેટ, ચુસ્ત કપડાં કાઢી નાખો.</li>
+      <li>અંગને સ્પ્લિન્ટ અથવા લાકડી વડે સ્થિર (immobilize) કરો.</li>
+      <li>ઝડપથી નજીકના CHC/PHC પર લઈ જાઓ.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🏥 Hospital Arrival Checklist</h2>
+    <ul>
+      <li><b>ABCDE:</b> Airway, Breathing, Circulation, Disability (GCS), Exposure.</li>
+      <li><b>IV Access:</b> તરત 2 મોટી નસમાં IV કેન્યુલા નાખો (NS ચાલુ કરો).</li>
+      <li><b>20WBCT:</b> લોહી ગંઠાય છે કે નહીં તે ચેક કરો (નીચે જુઓ).</li>
+      <li><b>Blood Sample:</b> બ્લડ ગ્રુપ, ક્રોસ-મેચ, RFT, PT/INR માટે લોહી લો.</li>
+      <li><b>Monitor:</b> BP, HR, SpO₂, RR, Urine Output (કેથેટર નાખો).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2. ASSESSMENT -->
+<section class="tab" id="t-assess">
+  <div class="card">
+    <h2>🔍 Assessment & 20WBCT</h2>
+    <p><b>20 Minute Whole Blood Clotting Test (20WBCT):</b></p>
+    <ol style="padding-left: 20px; font-size: 14px; margin: 8px 0;">
+      <li>નવી, સૂકી કાચની ટ્યુબમાં 1-2 mL વેનસ બ્લડ લો.</li>
+      <li>રૂમ ટેમ્પરેચર પર 20 મિનિટ સુધી બિન-હલાવેલી રાખો.</li>
+      <li>20 મિનિટ પછી ટ્યુબને ધીમેથી ઊંધી કરો.</li>
+      <li>જો લોહી <span class="red">પ્રવાહી (not clotted)</span> રહે → <b>Positive (Viper bite)</b>.</li>
+    </ol>
+    <div class="warn">20WBCT નો રિપોર્ટ આવે તે પહેલાં જો દર્દીમાં બ્લીડિંગ દેખાય તો તરત ASV શરૂ કરો (રિપોર્ટની રાહ ન જુઓ).</div>
+  </div>
+  <div class="card">
+    <h2>⚠️ Signs of Envenomation</h2>
+    <h3>Neurotoxic (Cobra / Krait):</h3>
+    <ul>
+      <li>પોપચાં પડી જવા (Ptosis), ડબલ વિઝન.</li>
+      <li>ગળી ન શકવું (Dysphagia), બોલવામાં તકલીફ (Dysarthria).</li>
+      <li>ગરદન નમી જવી, શ્વાસ લેવામાં તકલીફ (Respiratory failure).</li>
+    </ul>
+    <h3>Vasculotoxic (Viper):</h3>
+    <ul>
+      <li>બાઇટ સાઇટ પર સોજો અને પીડા.</li>
+      <li>માંથી/નાક/પેટમાંથી લોહી વહેવું.</li>
+      <li>પેશાબમાં લોહી (Haematuria), ઓછો પેશાબ (AKI).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. ASV PROTOCOL -->
+<section class="tab" id="t-asv">
+  <div class="card">
+    <h2>💉 Anti-Snake Venom (ASV) Administration</h2>
+    <div class="danger">
+      <b>Pre-medication:</b> ASV આપતાં પહેલાં <b>Inj. Adrenaline 0.25 mg SC</b> આપો.
+    </div>
+    <h3>Dose & Administration:</h3>
+    <ul>
+      <li><b>Dose:</b> 10 vials (બાળકો અને ગર્ભવતી મહિલાઓ માટે પણ 10 જ વાયલ્સ).</li>
+      <li><b>Dilution:</b> 10 vials ને 5-10 mL/kg NS માં ભેળવો.</li>
+      <li><b>Rate:</b> 30 થી 60 મિનિટમાં IV ઇન્ફ્યુઝન દ્વારા આપો (Infusion Pump).</li>
+      <li><b>Repeat:</b> જો 1 કલાક પછી લક્ષણો ન સુધરે તો ફરી 10 vials આપો (Max 30 vials).</li>
+    </ul>
+    <div class="success">
+      <b>Neurotoxic Bite (કોબ્રા):</b> ASV સાથે Inj. Atropine 0.6 mg IV + Inj. Neostigmine 1.5 mg IV આપો.
+    </div>
+  </div>
+</section>
+
+<!-- 4. ADVERSE REACTION -->
+<section class="tab" id="t-reaction">
+  <div class="card">
+    <h2>🚨 ASV Adverse Reaction</h2>
+    <div class="danger">
+      <b>જો દર્દીને ઇન્જેક્શન પછી અલર્જી થાય તો તરત ASV ઇન્ફ્યુઝન બંધ કરો.</b>
+    </div>
+    <h3>Signs:</h3>
+    <ul>
+      <li>શરીર પર ચકામા (Urticaria), ખંજવાળ.</li>
+      <li>શ્વાસ લેવામાં તકલીફ (Bronchospasm), લોહીનું દબાણ ઘટવું.</li>
+    </ul>
+    <h3>Immediate Treatment:</h3>
+    <ul>
+      <li><b>Inj. Adrenaline 0.5 mg IM</b> (જાંઘમાં) - જરૂર પડે તો 5 મિનિટ પછી રિપીટ કરો.</li>
+      <li><b>Inj. Hydrocortisone 100 mg IV</b>.</li>
+      <li><b>Inj. Chlorpheniramine 10 mg IV</b>.</li>
+      <li>ઓક્સિજન આપો, દર્દીને સૂવડાવો.</li>
+    </ul>
+    <div class="warn">રિએક્શન કાબૂમાં આવી જાય પછી ડોક્ટરની સલાહથી ધીમી ગતિએ ASV ફરી શરૂ કરો.</div>
+  </div>
+</section>
+
+<!-- 5. NURSING TASKS -->
+<section class="tab" id="t-nursing">
+  <div class="card">
+    <h2>📋 Nursing Care & Monitoring</h2>
+    <ul>
+      <li><b>Vitals:</b> દર 30 મિનિટે BP, HR, RR, SpO₂ ચેક કરો.</li>
+      <li><b>Urine:</b> કલાકદીઠ પેશાબનું પ્રમાણ મોનિટર કરો (≥ 0.5 mL/kg/hr).</li>
+      <li><b>Bleeding:</b> નાક, પેટ, પેશાબમાં લોહી છે કે નહીં તે ચેક કરો.</li>
+      <li><b>20WBCT:</b> દર 6 કલાકે રિપીટ કરો.</li>
+      <li><b>Wound:</b> ઘા પર સૂકી ડ્રેસિંગ કરો, પણ કાપો નહીં.</li>
+      <li><b>Tetanus:</b> જો બ્લીડિંગ ન હોય તો TT 0.5 mL IM આપો.</li>
+      <li><b>Antibiotics:</b> જો સડો (Necrosis) થાય તો ડોક્ટર ASV સાથે Co-amoxiclav આપશે.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<nav>
+  <button onclick="showTab('firstaid',this)" class="active"><span>🚑</span>First Aid</button>
+  <button onclick="showTab('assess',this)"><span>🔍</span>Assess</button>
+  <button onclick="showTab('asv',this)"><span>💉</span>ASV</button>
+  <button onclick="showTab('reaction',this)"><span>🚨</span>Reaction</button>
+  <button onclick="showTab('nursing',this)"><span>📋</span>Nursing</button>
+</nav>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('t-' + id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
