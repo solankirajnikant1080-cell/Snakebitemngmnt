@@ -3,71 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NurseSaathi Pro - CHC Emergency</title>
+<title>Snake Bite Protocol - CHC Nurse Guide</title>
 <style>
   :root {
-    --bg-color: #f2f6fa;
-    --card-bg: #ffffff;
-    --text-main: #1a2733;
-    --text-muted: #666;
-    --primary: #0b6e99;
-    --primary-light: #eaf4fa;
-    --danger: #c0392b;
-    --danger-bg: #fdecea;
-    --warn-bg: #fff3cd;
-    --border: #eef2f5;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --primary: #c0392b;
+    --primary-light: #f9ebea;
+    --danger-bg: #fadbd8;
+    --warn-bg: #fcf3cf;
+    --success-bg: #d5f5e3;
+    --border: #e1e8ed;
   }
 
   [data-theme="dark"] {
-    --bg-color: #121212;
-    --card-bg: #1e1e1e;
-    --text-main: #e0e0e0;
-    --text-muted: #a0a0a0;
-    --primary: #4db8ff;
-    --primary-light: #1a3a4a;
-    --danger: #ff6b6b;
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #ecf0f1;
+    --primary: #ff7675;
+    --primary-light: #4a1c1c;
     --danger-bg: #4a1c1c;
     --warn-bg: #4a3f1c;
+    --success-bg: #1c4a2a;
     --border: #333;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s; }
-  
+  * { box-sizing: border-box; margin: 0; padding: 0; transition: 0.3s; }
   body {
     font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg-color);
-    color: var(--text-main);
-    font-size: 15px;
-    line-height: 1.5;
-    padding-bottom: 75px;
+    background: var(--bg); color: var(--text);
+    font-size: 15px; line-height: 1.6; padding-bottom: 75px;
   }
 
   header {
-    background: linear-gradient(135deg, var(--primary), #08354a);
-    color: #fff;
-    padding: 14px 16px;
+    background: linear-gradient(135deg, var(--primary), #7b241c);
+    color: #fff; padding: 14px 16px;
     position: sticky; top: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   }
-  header h1 { font-size: 18px; font-weight: 600; }
-  
+  header h1 { font-size: 17px; font-weight: bold; }
   .theme-toggle {
     background: rgba(255,255,255,0.2); border: none; color: white;
-    padding: 6px 10px; border-radius: 20px; font-size: 16px; cursor: pointer;
+    padding: 5px 10px; border-radius: 20px; font-size: 16px; cursor: pointer;
   }
 
   main { padding: 12px; }
   .tab { display: none; }
-  .tab.active { display: block; animation: fade 0.3s; }
-  @keyframes fade { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .tab.active { display: block; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
   .card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 5px rgba(0,0,0,.05);
+    background: var(--card); border-radius: 12px;
+    padding: 16px; margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
   }
   .card h2 {
     font-size: 16px; color: var(--primary);
@@ -75,200 +66,182 @@
     border-bottom: 2px solid var(--border);
   }
   
-  ul { padding-left: 20px; }
-  li { margin-bottom: 6px; }
-  
-  .badge {
-    display: inline-block; padding: 2px 8px; border-radius: 12px;
-    font-size: 12px; font-weight: bold; background: var(--primary-light); color: var(--primary);
-  }
-  .badge-red { background: var(--danger-bg); color: var(--danger); }
+  ul { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 8px; }
 
-  /* Calculator Styles */
-  .input-group { margin-bottom: 12px; }
-  .input-group label { display: block; font-size: 13px; margin-bottom: 4px; font-weight: 600; }
-  .input-group input, .input-group select {
-    width: 100%; padding: 10px; border: 1px solid var(--border);
-    border-radius: 8px; background: var(--bg-color); color: var(--text-main);
-    font-size: 15px;
-  }
-  .calc-btn {
+  .alert-danger { background: var(--danger-bg); border-left: 4px solid var(--primary); padding: 12px; border-radius: 6px; font-weight: bold; color: var(--primary); }
+  .alert-warn { background: var(--warn-bg); border-left: 4px solid #f39c12; padding: 12px; border-radius: 6px; font-weight: bold; color: #d35400; }
+  .alert-success { background: var(--success-bg); border-left: 4px solid #27ae60; padding: 12px; border-radius: 6px; font-weight: bold; color: #1e8449; }
+
+  /* Timer Styles */
+  .timer-box { text-align: center; padding: 20px; background: var(--primary-light); border-radius: 12px; margin-top: 15px; }
+  .timer-display { font-size: 40px; font-weight: bold; color: var(--primary); font-family: monospace; }
+  .btn {
     background: var(--primary); color: white; border: none;
-    padding: 12px; border-radius: 8px; width: 100%;
-    font-size: 15px; font-weight: 600; cursor: pointer;
-    margin-top: 5px;
+    padding: 10px 20px; border-radius: 8px; font-size: 15px;
+    font-weight: bold; cursor: pointer; margin: 5px; width: 45%;
   }
-  .calc-result {
-    margin-top: 12px; padding: 12px; border-radius: 8px;
-    background: var(--primary-light); color: var(--primary);
-    font-size: 18px; font-weight: bold; text-align: center;
-    display: none;
-  }
+  .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+  th, td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--primary-light); color: var(--primary); }
 
   nav {
     position: fixed; bottom: 0; left: 0; right: 0;
-    background: var(--card-bg); display: flex; overflow-x: auto;
-    box-shadow: 0 -2px 10px rgba(0,0,0,.1); z-index: 200;
+    background: var(--card); display: flex; overflow-x: auto;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 200;
   }
   nav button {
-    flex: 1 0 auto; min-width: 70px; padding: 10px 4px;
-    border: none; background: none; font-size: 10px; color: var(--text-muted);
-    cursor: pointer; text-align: center;
+    flex: 1 0 auto; min-width: 65px; padding: 10px 4px;
+    border: none; background: none; font-size: 10px; color: var(--text);
+    cursor: pointer; text-align: center; font-weight: bold;
   }
   nav button span { display: block; font-size: 20px; margin-bottom: 2px; }
-  nav button.active { color: var(--primary); font-weight: 600; background: var(--primary-light); }
+  nav button.active { color: var(--primary); background: var(--primary-light); }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🩺 NurseSaathi Pro</h1>
+  <h1>🐍 Snakebite ER Protocol</h1>
   <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 </header>
 
 <main>
 
-<!-- 1. EMERGENCY -->
-<section class="tab active" id="t-emergency">
+<!-- 1. FIRST AID -->
+<section class="tab active" id="t-firstaid">
   <div class="card">
-    <h2>🚨 Cardiac Arrest (CPR)</h2>
+    <h2>🚑 First Aid & Triage</h2>
+    <div class="alert-danger">
+      ❌ <b>STRICTLY AVOID:</b><br>
+      1. Tourniquet / દોરો બાંધવો.<br>
+      2. ચીરો પાડવો (Incision) કે મોંથી ઝેર ચૂસવું.<br>
+      3. બાઇટ સાઇટ પર કેમિકલ કે સાબુ વાપરવો.
+    </div>
+    <div class="alert-success" style="margin-top: 10px;">
+      ✅ <b>WHAT TO DO:</b><br>
+      1. દર્દીને શાંત કરાવો, ડરાવો નહીં.<br>
+      2. બાઇટ કરેલા અંગને સ્થિર (Immobilize) રાખો.<br>
+      3. અંગમાંથી વીંટી, ઘડિયાળ, ચુસ્ત કપડાં કાઢી નાખો.<br>
+      4. તરત નજીકના CHC ખસેડો.
+    </div>
+  </div>
+  <div class="card">
+    <h2>🏥 Arrival Checklist</h2>
     <ul>
-      <li>Check Responsiveness & Pulse (10 sec).</li>
-      <li><b>CPR:</b> 100-120/min, 5-6 cm depth.</li>
-      <li><b>Ratio:</b> 30 compressions : 2 breaths.</li>
-      <li><b>Drugs:</b> Adrenaline 1 mg IV every 3-5 min.</li>
-      <li><b>Shock:</b> VF/VT -> 120-200 J.</li>
+      <li>ABCDE એસેસમેન્ટ કરો.</li>
+      <li>2 મોટી IV કેન્યુલા નાખો (NS ચાલુ કરો).</li>
+      <li>બ્લડ સેમ્પલ લો (RFT, PT/INR, Grouping).</li>
+      <li>તરત <b>20WBCT</b> ટેસ્ટ કરો (ટાઈમર માટે Tools ટેબ જુઓ).</li>
+      <li>કેથેટર નાખીને યુરિન આઉટપુટ મોનિટર કરો.</li>
     </ul>
   </div>
+</section>
+
+<!-- 2. ASSESSMENT & TIMER -->
+<section class="tab" id="t-tools">
   <div class="card">
-    <h2>🔴 Anaphylaxis</h2>
+    <h2>⏱️ 20WBCT Timer (ખૂબ મહત્વનું)</h2>
+    <p style="font-size: 14px; margin-bottom: 10px;">સૂકી કાચની ટ્યુબમાં 2ml લોહી લો. 20 મિનિટ સુધી અડ્યા વગર રાખો. 20 મિનિટ પછી ટ્યુબ ઊંધી કરો. જો લોહી પ્રવાહી રહે તો તે વાઈપર (Viper) બાઇટ છે.</p>
+    <div class="timer-box">
+      <div class="timer-display" id="timer-display">20:00</div>
+      <div style="margin-top: 15px;">
+        <button class="btn" onclick="startTimer()">Start</button>
+        <button class="btn btn-outline" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔍 Signs of Envenomation</h2>
+    <h3 style="color: #d35400; font-size: 15px;">Neurotoxic (કોબ્રા / ક્રેટ):</h3>
     <ul>
-      <li><b>Adrenaline 0.5 mg IM</b> (Mid-thigh) - Immediate.</li>
-      <li>Oxygen + IV NS 500-1000 mL bolus.</li>
-      <li>Monitor BP and HR closely.</li>
+      <li>પોપચાં પડી જવા (Ptosis), ડબલ વિઝન.</li>
+      <li>ગળી ન શકવું, બોલવામાં તકલીફ.</li>
+      <li>શ્વાસ લેવામાં તકલીફ (Respiratory Paralysis).</li>
     </ul>
-  </div>
-</section>
-
-<!-- 2. CALCULATORS -->
-<section class="tab" id="t-calculators">
-  <div class="card">
-    <h2>🧮 Drip Rate Calculator</h2>
-    <div class="input-group">
-      <label>Volume (mL)</label>
-      <input type="number" id="vol" placeholder="e.g. 500">
-    </div>
-    <div class="input-group">
-      <label>Time (Hours)</label>
-      <input type="number" id="time" placeholder="e.g. 8">
-    </div>
-    <div class="input-group">
-      <label>Drop Factor (drops/mL)</label>
-      <select id="drop">
-        <option value="20">20 (Macro)</option>
-        <option value="15">15</option>
-        <option value="60">60 (Micro)</option>
-      </select>
-    </div>
-    <button class="calc-btn" onclick="calcDrip()">Calculate Drops/Min</button>
-    <div class="calc-result" id="drip-res"></div>
-  </div>
-
-  <div class="card">
-    <h2>🧠 GCS Calculator</h2>
-    <div class="input-group">
-      <label>Eye Opening (1-4)</label>
-      <select id="gcs-eye">
-        <option value="4">4 - Spontaneous</option>
-        <option value="3">3 - To command</option>
-        <option value="2">2 - To pain</option>
-        <option value="1">1 - None</option>
-      </select>
-    </div>
-    <div class="input-group">
-      <label>Verbal Response (1-5)</label>
-      <select id="gcs-verbal">
-        <option value="5">5 - Oriented</option>
-        <option value="4">4 - Confused</option>
-        <option value="3">3 - Inappropriate</option>
-        <option value="2">2 - Sounds</option>
-        <option value="1">1 - None</option>
-      </select>
-    </div>
-    <div class="input-group">
-      <label>Motor Response (1-6)</label>
-      <select id="gcs-motor">
-        <option value="6">6 - Obeys</option>
-        <option value="5">5 - Localizes</option>
-        <option value="4">4 - Withdraws</option>
-        <option value="3">3 - Flexion</option>
-        <option value="2">2 - Extension</option>
-        <option value="1">1 - None</option>
-      </select>
-    </div>
-    <button class="calc-btn" onclick="calcGCS()">Calculate GCS</button>
-    <div class="calc-result" id="gcs-res"></div>
-  </div>
-</section>
-
-<!-- 3. SNAKE BITE -->
-<section class="tab" id="t-snake">
-  <div class="card">
-    <h2>🐍 Snake Bite Protocol</h2>
-    <div class="badge badge-red">Strictly NO Tourniquet / Incision</div>
-    <ul style="margin-top:10px;">
-      <li><b>First Aid:</b> Immobilize limb, remove rings.</li>
-      <li><b>20WBCT:</b> Check blood clotting every 6 hrs.</li>
-      <li><b>ASV Dose:</b> 10 vials in 5-10 mL/kg NS over 1 hr.</li>
-      <li><b>Pre-med:</b> Adrenaline 0.25 mg SC.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- 4. DRUGS -->
-<section class="tab" id="t-drugs">
-  <div class="card">
-    <h2>💉 High Alert Drugs</h2>
+    <h3 style="color: #c0392b; font-size: 15px; margin-top: 10px;">Vasculotoxic (વાઈપર):</h3>
     <ul>
-      <li><b>Adrenaline:</b> 1 mg/mL (1:1000)</li>
-      <li><b>Noradrenaline:</b> 4 mg/2 mL</li>
-      <li><b>Insulin:</b> 100 IU/mL</li>
-      <li><b>KCl:</b> NEVER IV push.</li>
+      <li>બાઇટ સાઇટ પર સોજો અને પીડા.</li>
+      <li>માંથી, નાકમાંથી કે પેશાબમાં લોહી.</li>
+      <li>ઓછો પેશાબ (Acute Kidney Injury).</li>
     </ul>
   </div>
 </section>
 
-<!-- 5. SKILLS -->
-<section class="tab" id="t-skills">
+<!-- 3. ASV PROTOCOL -->
+<section class="tab" id="t-asv">
   <div class="card">
-    <h2>✅ Skills Progress</h2>
-    <div class="input-group">
-      <label><input type="checkbox" onchange="updateSkill(this)"> IV Cannulation</label>
+    <h2>💉 ASV Administration</h2>
+    <div class="alert-warn">
+      <b>Pre-medication (ફરજિયાત):</b><br>
+      ASV આપતા પહેલા <b>Inj. Adrenaline 0.25 mg SC</b> આપો.
     </div>
-    <div class="input-group">
-      <label><input type="checkbox" onchange="updateSkill(this)"> CPR (BLS)</label>
+    
+    <table>
+      <tr><th>Parameter</th><th>Details</th></tr>
+      <tr><td>Dose (બધા માટે)</td><td><b>10 Vials</b> (બાળકો/ગર્ભવતી માટે પણ 10)</td></tr>
+      <tr><td>Dilution</td><td>10 vials ને 5-10 mL/kg NS માં ભેળવો</td></tr>
+      <tr><td>Rate</td><td>પહેલા 10 મિનિટ ધીમે, પછી 1 કલાકમાં પૂરું</td></tr>
+      <tr><td>Repeat</td><td>1 કલાક પછી લક્ષણો ન સુધરે તો ફરી 10 vials</td></tr>
+    </table>
+    
+    <div class="alert-success" style="margin-top: 15px;">
+      <b>Neurotoxic (કોબ્રા) માટે:</b><br>
+      ASV સાથે <b>Inj. Atropine 0.6 mg IV</b> + <b>Inj. Neostigmine 1.5 mg IV</b> આપો.
     </div>
-    <div class="input-group">
-      <label><input type="checkbox" onchange="updateSkill(this)"> Oxygen Therapy</label>
+  </div>
+</section>
+
+<!-- 4. ADVERSE REACTION -->
+<section class="tab" id="t-reaction">
+  <div class="card">
+    <h2>🚨 ASV Reaction Management</h2>
+    <div class="alert-danger">
+      જો દર્દીને ચકામા (Urticaria), શ્વાસ લેવામાં તકલીફ કે BP ડ્રોપ થાય તો તરત ASV ઇન્ફ્યુઝન <b>બંધ કરો</b>.
     </div>
-    <div class="input-group">
-      <label><input type="checkbox" onchange="updateSkill(this)"> ASV Administration</label>
-    </div>
+    
+    <h3 style="margin-top: 15px; color: var(--primary);">Immediate Action:</h3>
+    <ul>
+      <li><b>Inj. Adrenaline 0.5 mg IM</b> (જાંઘમાં) - જરૂર પડે તો રિપીટ કરો.</li>
+      <li><b>Inj. Hydrocortisone 100 mg IV</b> આપો.</li>
+      <li><b>Inj. Chlorpheniramine 10 mg IV</b> આપો.</li>
+      <li>ઓક્સિજન આપો, દર્દીને સૂવડાવો.</li>
+    </ul>
+    <p style="margin-top: 10px; font-size: 13px;">રિએક્શન કાબૂમાં આવી જાય પછી ડોક્ટરની સલાહથી ધીમી ગતિએ ASV ફરી શરૂ કરી શકાય.</p>
+  </div>
+</section>
+
+<!-- 5. NURSING CARE -->
+<section class="tab" id="t-nursing">
+  <div class="card">
+    <h2>📋 Nursing Care & Monitoring</h2>
+    <ul>
+      <li><b>Vitals:</b> દર 30 મિનિટે BP, HR, SpO₂, RR ચેક કરો.</li>
+      <li><b>Urine:</b> કલાકદીઠ પેશાબનું પ્રમાણ (≥ 0.5 mL/kg/hr).</li>
+      <li><b>Bleeding:</b> નાક, પેટ, પેશાબમાં લોહી ચેક કરો.</li>
+      <li><b>20WBCT:</b> દર 6 કલાકે રિપીટ કરો.</li>
+      <li><b>Tetanus:</b> જો બ્લીડિંગ ન હોય તો TT 0.5 mL IM આપો.</li>
+      <li><b>Wound:</b> સૂકી ડ્રેસિંગ કરો, કાપો નહીં.</li>
+    </ul>
   </div>
 </section>
 
 </main>
 
 <nav>
-  <button onclick="showTab('emergency',this)" class="active"><span>🚨</span>ER</button>
-  <button onclick="showTab('calculators',this)"><span>🧮</span>Tools</button>
-  <button onclick="showTab('snake',this)"><span>🐍</span>Snake</button>
-  <button onclick="showTab('drugs',this)"><span>💉</span>Drugs</button>
-  <button onclick="showTab('skills',this)"><span>✅</span>Skills</button>
+  <button onclick="showTab('firstaid',this)" class="active"><span>🚑</span>First Aid</button>
+  <button onclick="showTab('tools',this)"><span>⏱️</span>Timer</button>
+  <button onclick="showTab('asv',this)"><span>💉</span>ASV</button>
+  <button onclick="showTab('reaction',this)"><span>🚨</span>Reaction</button>
+  <button onclick="showTab('nursing',this)"><span>📋</span>Care</button>
 </nav>
 
 <script>
-// Tab Switching Logic
+// Tab Switching
 function showTab(id, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('t-' + id).classList.add('active');
@@ -277,7 +250,7 @@ function showTab(id, btn) {
   window.scrollTo(0,0);
 }
 
-// Dark Mode Toggle
+// Dark Mode
 function toggleTheme() {
   const body = document.body;
   if (body.getAttribute('data-theme') === 'dark') {
@@ -289,55 +262,43 @@ function toggleTheme() {
   }
 }
 
-// Drip Rate Calculator Logic
-function calcDrip() {
-  const vol = parseFloat(document.getElementById('vol').value);
-  const time = parseFloat(document.getElementById('time').value);
-  const drop = parseFloat(document.getElementById('drop').value);
-  const res = document.getElementById('drip-res');
+// 20WBCT Timer Logic
+let timerInterval;
+let timeLeft = 20 * 60; // 20 minutes in seconds
 
-  if (vol && time && drop) {
-    const totalMin = time * 60;
-    const dropsPerMin = Math.round((vol * drop) / totalMin);
-    res.style.display = 'block';
-    res.innerHTML = `Rate: ${dropsPerMin} drops / min`;
-  } else {
-    res.style.display = 'block';
-    res.innerHTML = `કૃપા કરીને બધી વિગતો ભરો.`;
-    res.style.color = 'var(--danger)';
-  }
+function updateDisplay() {
+  const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+  const s = (timeLeft % 60).toString().padStart(2, '0');
+  document.getElementById('timer-display').innerText = `${m}:${s}`;
 }
 
-// GCS Calculator Logic
-function calcGCS() {
-  const eye = parseInt(document.getElementById('gcs-eye').value);
-  const verbal = parseInt(document.getElementById('gcs-verbal').value);
-  const motor = parseInt(document.getElementById('gcs-motor').value);
-  const res = document.getElementById('gcs-res');
-
-  const total = eye + verbal + motor;
-  res.style.display = 'block';
-  res.style.color = 'var(--primary)';
-  
-  let severity = "";
-  if (total >= 13) severity = "Mild Injury";
-  else if (total >= 9) severity = "Moderate Injury";
-  else severity = "Severe Injury (Intubate!)";
-
-  res.innerHTML = `Total GCS: ${total}/15<br><span style="font-size:14px; color:var(--text-main);">${severity}</span>`;
+function startTimer() {
+  if (timerInterval) return; // Prevent multiple intervals
+  timerInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--;
+      updateDisplay();
+    } else {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      document.getElementById('timer-display').innerText = "DONE!";
+      // Play a beep sound if supported
+      try {
+        let ctx = new (window.AudioContext || window.webkitAudioContext)();
+        let osc = ctx.createOscillator();
+        osc.connect(ctx.destination);
+        osc.start();
+        setTimeout(() => osc.stop(), 1000);
+      } catch(e) {}
+    }
+  }, 1000);
 }
 
-// Skills Save Logic (Using LocalStorage)
-document.querySelectorAll('#t-skills input[type="checkbox"]').forEach((cb, index) => {
-  // Load saved state
-  if(localStorage.getItem('skill_'+index) === 'true') {
-    cb.checked = true;
-  }
-});
-
-function updateSkill(cb) {
-  const index = Array.from(document.querySelectorAll('#t-skills input[type="checkbox"]')).indexOf(cb);
-  localStorage.setItem('skill_'+index, cb.checked);
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timeLeft = 20 * 60;
+  updateDisplay();
 }
 </script>
 
